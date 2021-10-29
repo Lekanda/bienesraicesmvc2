@@ -51,7 +51,7 @@ class ActiveRecord {
     }
 
     public function crear(){
-        //TODO capitulos 356 y anteriores. static y protected. conexion a la db.
+       
 
         //Sanitizar los datos del formulario
         $atributos = $this->sanitizarAtributos();
