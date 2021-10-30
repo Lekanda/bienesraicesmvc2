@@ -2,5 +2,8 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
-debuguear(__DIR__);
+use MVC\Router;
+
+$router = new Router();
+
 
