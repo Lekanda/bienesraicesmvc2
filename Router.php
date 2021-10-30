@@ -13,6 +13,11 @@ class Router  {
         // debuguear($this->rutasGET[$url]);
     }
 
+    public function post($url,$fn){
+        $this->rutasPOST[$url] = $fn;
+        // debuguear($this->rutasGET[$url]);
+    }
+
 
     public function comprobarRutas(){
         // Con PATH_INFO leemos la peticion que le hacemos  al servidor (p.ej: /propiedades)
@@ -22,7 +27,11 @@ class Router  {
         if ($metodo === 'GET') {
             // Comprueba que 'rutasGET[]' y lo escrito en la url sea igual y trae la funcion asociada a $fn.
             $fn = $this->rutasGET[$urlActual] ?? null;
+        } else {
+            // Comprueba que 'rutasPOST[]' y lo escrito en la url sea igual y trae la funcion asociada a $fn.
+            $fn = $this->rutasPOST[$urlActual] ?? null;
         }
+        
 
         // Sí La funcion existe y su funcion asociada
         if ($fn) {
