@@ -36,7 +36,17 @@ class Router  {
     }
 
     // Muestra una vista
-    public function render($view){
+    public function render($view,$datos = []){
+
+        foreach ($datos as $key => $value) {
+            // $$:Al llamar a $key devuelve el valor $value
+            $$key = $value;
+        }
+
+
+        ob_start(); // Inicia un almacenamiento en memoria.
         include __DIR__ . "/views/$view.php";
+        $contenido = ob_get_clean(); //Guarda en $contenido la mememoria y la limpia.
+        include __DIR__ . "/views/layout.php"; // Incluye el 'layout.php'(header y footer).
     }
 }
