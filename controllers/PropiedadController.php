@@ -1,15 +1,17 @@
 <?php 
 
 namespace Controllers;
+use MVC\Router;
 
 class PropiedadController {
-    public static function index(){
-        echo 'Funcion index en controlador';
+    public static function index(Router $router){
+        $router->render('propiedades/admin');
     }
     public static function crear(){
-        echo 'Funcion crear en controlador';
+        $router->render('propiedades/crear');
     }
     public static function actualizar(){
-        echo 'Funcion actualizar en controlador';
+        $router->render('propiedades/actualizar');
     }
+    
 }

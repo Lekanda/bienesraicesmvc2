@@ -1,7 +1,7 @@
 <?php 
 
 namespace MVC;
-
+    
 class Router  {
 
     public $rutasGET = [];
@@ -33,5 +33,10 @@ class Router  {
         }
 
         
+    }
+
+    // Muestra una vista
+    public function render($view){
+        include __DIR__ . "/views/$view.php";
     }
 }
