@@ -9,7 +9,6 @@ class Router  {
 
     // Mete en $rutasGET los nombres de las funciones de las rutas de 'public/index.php'.
     public function get($url,$fn){
-        // Llena el array con las funciones de las rutas que estan en el 'public/index.php'.
         $this->rutasGET[$url] = $fn;
         // debuguear($this->rutasGET[$url]);
     }
