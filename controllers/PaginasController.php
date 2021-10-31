@@ -8,10 +8,13 @@ use Model\Propiedad;
 class PaginasController{
 
     public static function index (Router $router){
-        $propiedades = Propiedad::all();
 
-        $router->render('/',[
+        $propiedades = Propiedad::get(3);
+        $inicio = true;
+
+        $router->render('paginas/index', [
             'propiedades' => $propiedades,
+            'inicio' => $inicio
         ]);
     }
     public static function nosotros(){
