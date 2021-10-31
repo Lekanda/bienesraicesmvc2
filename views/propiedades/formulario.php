@@ -33,8 +33,7 @@
     <?php endif; ?>
     
     <label for="descripcion">Descripcion:</label>
-    <textarea id="descripcion" name="propiedad[descripcion]"><?php echo($propiedad->descripcion); ?>
-    </textarea>
+    <textarea id="descripcion" name="propiedad[descripcion]"><?php echo($propiedad->descripcion); ?></textarea>
 
 </fieldset>
 
