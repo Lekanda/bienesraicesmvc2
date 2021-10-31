@@ -36,7 +36,7 @@
                     <img class="dark-mode-boton" src="/build/img/dark-mode.svg">
                     <nav class="navegacion">
                         <a href="/nosotros">Nosotros</a>
-                        <a href="/anuncios">Anuncios</a>
+                        <a href="/propiedades">Anuncios</a>
                         <a href="/blog">Blog</a>
                         <a href="/contacto">Contacto</a>
                         <?php if ($auth) : ?>
@@ -64,7 +64,7 @@
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
                 <a href="/nosotros">Nosotros</a>
-                <a href="/anuncios">Anuncios</a>
+                <a href="/propiedades">Anuncios</a>
                 <a href="/blog">Blog</a>
                 <a href="/contacto">Contacto</a>
             </nav>
