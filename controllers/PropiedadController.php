@@ -18,6 +18,7 @@ class PropiedadController {
         ]);
     }
 
+
     public static function crear(Router $router){
         $propiedad = new Propiedad;
         $vendedores = Vendedor::all();
@@ -66,7 +67,6 @@ class PropiedadController {
 
     public static function actualizar(Router $router){
         $id = validarORedireccionar('/admin');
-
         $propiedad = Propiedad::find($id);
         $vendedores = Vendedor::all();
 
@@ -76,7 +76,6 @@ class PropiedadController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Asignar los atributos
             $args = $_POST['propiedad'];
-    
             $propiedad->sincronizar($args);
     
             // Validacion
@@ -97,18 +96,34 @@ class PropiedadController {
                     if ($_FILES['propiedad']['tmp_name']['imagen']){
                         $image->save(CARPETAS_IMAGENES . $nombreImagen);
                     }
-                    
-                    
                     $propiedad->guardar();
                 }
         }
-        
 
         $router->render('propiedades/actualizar',[
             'propiedad' => $propiedad,
             'vendedores' => $vendedores,
             'errores' => $errores
         ]);
+    }
+
+
+    /*********ELIMINAR PROPIEDAD*********/
+    public static function eliminar(){
+        
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // debuguear($_POST['tipo']);
+                $id = $_POST['id'];
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+                if ($id) {
+                    $tipo = $_POST['tipo'];
+        
+                    if (validarTipoContenido($tipo)) {
+                        $propiedad = Propiedad::find($id);
+                        $propiedad->eliminar();
+                    }
+                }
+            }
     }
     
 }
