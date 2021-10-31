@@ -9,12 +9,14 @@ use Intervention\Image\ImageManagerStatic as Image;
 class PropiedadController {
     public static function index(Router $router){
         $propiedades = Propiedad::all();
+        $vendedores = Vendedor::all();
         // Muestra mensaje condicional, si no hay lo pone como null
         $resultado = $_GET['resultado'] ?? null;
 
         $router->render('propiedades/admin', [
             'propiedades' => $propiedades,
-            'resultado' => $resultado
+            'resultado' => $resultado,
+            'vendedores' => $vendedores
         ]);
     }
 
@@ -62,8 +64,8 @@ class PropiedadController {
             'propiedad' => $propiedad,
             'vendedores' => $vendedores,
             'errores' => $errores
-    ]);
-}
+        ]);
+    }
 
     public static function actualizar(Router $router){
         $id = validarORedireccionar('/admin');
