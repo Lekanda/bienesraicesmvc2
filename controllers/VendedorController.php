@@ -17,6 +17,7 @@ class VendedorController {
             $vendedor =new Vendedor($_POST['vendedor']);
 
             $errores = $vendedor->validar();
+            
             if (empty($errores)) {
                 $vendedor->guardar();
             }
@@ -27,6 +28,7 @@ class VendedorController {
     ]);
     }
 
+    
     public static function actualizar(Router $router){
         $id = validarORedireccionar('/admin');
         $vendedor = Vendedor::find($id);
@@ -50,6 +52,23 @@ class VendedorController {
             'vendedor' => $vendedor,
             'errores' => $errores
         ]);
+    }
+
+
+    public static function eliminar(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // debuguear($_POST['tipo']);
+            $id = $_POST['id'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+            if ($id) {
+                $tipo = $_POST['tipo'];
+    
+                if (validarTipoContenido($tipo)) {
+                    $vendedor = Vendedor::find($id);
+                    $vendedor->eliminar();
+                }
+            }
+        }
     }
 
 }
