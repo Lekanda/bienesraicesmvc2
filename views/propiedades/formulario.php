@@ -25,7 +25,9 @@
         type="file" 
         id="imagen" 
         accept="image/jpeg, image/png" 
-        name="propiedad[imagen]">
+        name="propiedad[imagen]"
+    >
+
     <?php if($propiedad->imagen): ?>
         <img src="/imagenes/<?php echo $propiedad->imagen ?>" class="imagen-small">
     <?php endif; ?>

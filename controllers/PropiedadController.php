@@ -45,12 +45,10 @@ class PropiedadController {
     
             // Comprobar que no haya errores en arreglo $errores. Comprueba que este VACIO (empty).
             if (empty($errores)) {
-                
                 // Crear una carpeta
                 if (!is_dir(CARPETAS_IMAGENES)){
                     mkdir(CARPETAS_IMAGENES);
                 }
-                
                 // Guarda la imagen en el servidor/Carpeta imagenes en raiz
                 $image->save(CARPETAS_IMAGENES . $nombreImagen);
                 
@@ -71,9 +69,40 @@ class PropiedadController {
 
         $propiedad = Propiedad::find($id);
         $vendedores = Vendedor::all();
-        
+
         // Arreglo con mensajes de errores
         $errores = Propiedad::getErrores();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Asignar los atributos
+            $args = $_POST['propiedad'];
+    
+            $propiedad->sincronizar($args);
+    
+            // Validacion
+            $errores = $propiedad->validar();
+    
+            // Subida de archivos(Imagen). Realiza un resize a la imagen con Intervention Image.
+            // Generar un nombre unico
+            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
+                $propiedad->setImagen($nombreImagen);
+                }
+        
+                // Comprobar que no haya errores en arreglo $errores. Comprueba que este VACIO (empty).
+                if (empty($errores)) {
+                    // Almacenar la imagen
+                    if ($_FILES['propiedad']['tmp_name']['imagen']){
+                        $image->save(CARPETAS_IMAGENES . $nombreImagen);
+                    }
+                    
+                    
+                    $propiedad->guardar();
+                }
+        }
+        
 
         $router->render('propiedades/actualizar',[
             'propiedad' => $propiedad,
