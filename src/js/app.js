@@ -42,6 +42,7 @@ function eventListeners() {
     const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"]');
     // Itera en el select del formulario y pone un eventlistener a cada uno
     metodoContacto.forEach(input => input.addEventListener('click', mostrarMetodoContacto));
+
     /************************************************************************************/
 
 
@@ -55,11 +56,30 @@ function eventListeners() {
     }, 3000);
 }
 
-function mostrarMetodoContacto(){
-    console.log('Seleccionando...');
+function mostrarMetodoContacto(e){
+    const contactoDiv = document.querySelector('#contacto');
+    if (e.target.value === 'telefono') {
+        contactoDiv.innerHTML = `
+                <label for="telefono">Numero de Teléfono</label>
+                <input type="tel" placeholder="Tu Teléfono" id="telefono" name="contacto[telefono]"> 
+
+                <p>Elija la fecha y la hora para llamada</p>
+
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="contacto[fecha]">
+
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" min="09:00" max="18:00" name="contacto[hora]">
+        `;
+    } else {
+        contactoDiv.innerHTML = `
+                <label for="email">E-mail</label>
+                <input type="email" placeholder="Tu Email" id="email" name="contacto[email]" required>
+        `;
+    }
 }
 
-function navegacionResponsive() {
+function navegacionResponsive(e) {
     const navegacion = document.querySelector('.navegacion');
 
     navegacion.classList.toggle('mostrar')
