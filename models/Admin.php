@@ -37,13 +37,22 @@ class Admin extends ActiveRecord{
         $query = "SELECT * FROM " . self::$tabla . " WHERE  email = '" . $this->email . "' LIMIT 1";
 
         $resultado = self::$db->query($query);
-        // debuguear($resultado);
 
         if (!$resultado->num_rows) {
             self::$errores[]= "El Usuario no existe";
             return;
         } 
         return $resultado;
+    }
+
+
+    public function comprobarPassword($resultado){
+        $usuario = $resultado->fetch_object(); 
+        $autenticado = password_verify($this->password, $usuario->password);
+        if (!$autenticado) {
+            self::$errores[] = "Password incorrecto";
+        }
+        return $autenticado;
     }
 
 }

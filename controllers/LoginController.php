@@ -8,7 +8,6 @@ use Model\Admin;
 class LoginController{
 
     public static function login(Router $router){
-
         $errores = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,19 +18,20 @@ class LoginController{
             if (empty($errores)) {
                 // Verificar si el usuario existe
                 $resultado = $auth->existeUsuario();
+
                 if (!$resultado) {
                     $errores = Admin::getErrores();
                 } else {
                     // Verificar el password
-                    
+                    $autenticado = $auth->comprobarPassword($resultado);
+                    if ($autenticado) {
+                        // Autenticar al usuario
 
-                    // Autenticar al usuario
-
+                    } else {
+                        // Password incorrecto
+                        $errores = Admin::getErrores();
+                    }
                 }
-
-                
-
-
             }
         }
 
@@ -39,6 +39,10 @@ class LoginController{
             'errores' => $errores
         ]);
     }
+
+
+
+
 
     public static function logout(){
         echo 'Desde Logout';
