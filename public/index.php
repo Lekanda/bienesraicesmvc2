@@ -3,9 +3,10 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
-use Controllers\PropiedadController;
-use Controllers\VendedorController;
+use Controllers\LoginController;
 use Controllers\PaginasController;
+use Controllers\VendedorController;
+use Controllers\PropiedadController;
 
 $router = new Router();
 
@@ -25,9 +26,6 @@ $router->post('/vendedores/eliminar', [VendedorController::class, 'eliminar']);
 
 
 
-
-
-
 /****************************Zona publica*********************************************/
 $router->get('/',[PaginasController::class, 'index']);
 $router->get('/nosotros',[PaginasController::class, 'nosotros']);
@@ -39,6 +37,11 @@ $router->get('/contacto',[PaginasController::class, 'contacto']);
 $router->post('/contacto',[PaginasController::class, 'contacto']);
 
 
+/****************************Zona Logueado*********************************************/
+
+$router->get('/login',[LoginController::class, 'login']);
+$router->post('/login',[LoginController::class, 'login']);
+$router->get('/logout',[LoginController::class, 'logout']);
 
 
 $router->comprobarRutas();
