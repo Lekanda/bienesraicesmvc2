@@ -42,10 +42,11 @@ class LoginController{
 
 
 
-
-
     public static function logout(){
-        echo 'Desde Logout';
+        session_start(); // Acceder a la Sesion
+        $_SESSION = [];
+
+        header('Location: /');
     }
 
 }
